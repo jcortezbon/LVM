@@ -36,11 +36,11 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
 
     `lvs`
     
-    - Si no lo tienes instalalo:
+- Si no lo tienes instalalo:
     
-        `sudo yum makecache`
+    `sudo yum makecache`
         
-        `sudo yum install lvm`
+    `sudo yum install lvm`
 
 2. Tener Privilegios sudo o ser root
 3. Listar los discos existentes:
