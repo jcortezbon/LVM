@@ -73,9 +73,9 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
         0 LVM physical volume whole disks
         5 LVM physical volumes
 
-7. Puedes mostrar Physical Volume; hay 3 comandos que se usan para mostrar propiedades de physical volumes LVM: pvs, pvdisplay, and pvscan
+7. View Physical Volume; hay 3 comandos que se usan para mostrar propiedades de physical volumes en LVM: pvs, pvdisplay, and pvscan
 
-8. Crea 2 volume group name vg-docker y vg-extradata, asignandole 2 particion a cada grupo: sudo vgcreate vg-docker /dev/sdd1 /dev/sde1
+8. Crear los 2 Volume Group "vg-docker" "vg-extradata" y asignarle 2 particion a cada grupo: sudo vgcreate vg-docker /dev/sdd1 /dev/sde1
 
 sudo vgcreate vg-extradata /dev/sdd1 /dev/sde1
 
