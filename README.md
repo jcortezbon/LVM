@@ -22,11 +22,29 @@ Volume group (VG)    A VL is a storage pool, made of one or more PVs.
 Logical extent (LE)  Every PE is associated with an LE, and these PEs can be combined into a logical volume.
 Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be formatted with a filesystem and then mounted on the directory of your choice.
 
+## Laboratorio:
+- Crear un VM con 5 discos atachados
+- Crear 2 VolumeGroups:
+    - vg-docker
+    - vg-extradata
+-Crear un LogicalVolume de 2GB en cada VG
+-Montar un FileSystem a los VG de tipo XFS
+
 ## Pasos:
-- pasar a root o ser sudo
-- Listar los discos existentes: lsblk 
-- Crear particion y ID de LVM disco por disco y seguir al asistente. Ejm. para disco "sdb": fdisk /dev/sdb
-- Debe tener ID = 8e 
+- 1. Verificar que tienes LVM
+    `lvs`
+    - Si no lo tienes instalalo:
+        `sudo yum makecache`
+        `sudo yum install lvm`
+
+- 2. Tener Privilegios sudo o ser root
+- 3. Listar los discos existentes:
+    `lsblk`
+    `fdisk -l`
+
+- 4. Formatear los discos y crear la particion (1,2...n) e ID de LVM (8e) y seguir al asistente. Ejm. para disco "sdb": 
+    `fdisk /dev/sdb`
+
 - Agregando el disco o la(s) particion(es) a LVM physical volume: pvcreate /dev/sdb1 /dev/sdc1
 - You can Scanning for Block Devices: lvmdiskscan
 - Puedes mostrar Physical Volume; hay 3 comandos que se usan para mostrar propiedades de physical volumes LVM: pvs, pvdisplay, and pvscan
