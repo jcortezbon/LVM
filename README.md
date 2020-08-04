@@ -27,21 +27,27 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
 - Crear 2 VolumeGroups:
     - vg-docker
     - vg-extradata
--Crear un LogicalVolume de 2GB en cada VG
--Montar un FileSystem a los VG de tipo XFS
+- Crear un LogicalVolume de 2GB en cada VG
+- Montar un FileSystem a los VG de tipo XFS
 
 ## Pasos:
 
 1. Verificar que tienes LVM
-    `lvs`
+
+`lvs`
+    
     - Si no lo tienes instalalo:
-        `sudo yum makecache`
-        `sudo yum install lvm`
+    
+    `sudo yum makecache`
+    
+    `sudo yum install lvm`
 
 2. Tener Privilegios sudo o ser root
 3. Listar los discos existentes:
-    `lsblk`
-    `fdisk -l`
+
+`lsblk`
+
+`fdisk -l`
 
 4. Formatear los discos y crear la particion (1,2...n) e ID de LVM (8e) y seguir al asistente. Ejm. para disco "sdb": 
     `fdisk /dev/sdb`
