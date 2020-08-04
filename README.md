@@ -31,18 +31,19 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
 -Montar un FileSystem a los VG de tipo XFS
 
 ## Pasos:
-- 1. Verificar que tienes LVM
+
+1. Verificar que tienes LVM
     `lvs`
     - Si no lo tienes instalalo:
         `sudo yum makecache`
         `sudo yum install lvm`
 
-- 2. Tener Privilegios sudo o ser root
-- 3. Listar los discos existentes:
+2. Tener Privilegios sudo o ser root
+3. Listar los discos existentes:
     `lsblk`
     `fdisk -l`
 
-- 4. Formatear los discos y crear la particion (1,2...n) e ID de LVM (8e) y seguir al asistente. Ejm. para disco "sdb": 
+4. Formatear los discos y crear la particion (1,2...n) e ID de LVM (8e) y seguir al asistente. Ejm. para disco "sdb": 
     `fdisk /dev/sdb`
 
 - Agregando el disco o la(s) particion(es) a LVM physical volume: pvcreate /dev/sdb1 /dev/sdc1
