@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/jcortezb/github/LVM","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}},"virtualbox":{"/vdata":{"guestpath":"/vdata","hostpath":"/home/jcortezb/github/LVM","disabled":false,"__vagrantfile":true}}}
