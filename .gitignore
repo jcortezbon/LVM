@@ -1,2 +1,4 @@
 note
-Vagrantfile-old
+Vagrantfile-o*
+*.vdi
+.gitinore
