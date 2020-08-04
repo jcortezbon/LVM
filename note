@@ -1,5 +1,2 @@
-lsblk --> view hard disk
 sudo yum makecache
 sudo yum install lvm2
-
-
