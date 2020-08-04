@@ -40,7 +40,7 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
     
     `sudo yum makecache`
         
-    `sudo yum install lvm`
+    `sudo yum install lvm2`
 
 2. Tener Privilegios sudo o ser root
 3. Listar los discos existentes:
@@ -49,14 +49,36 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
 
     `fdisk -l`
 
-4. Formatear los discos y crear la particion (1,2...n) e ID de LVM (8e) y seguir al asistente. Ejm. para disco "sdb": 
+4. Formatear los discos y crear la(s) particion(es) (1,2...n) y el ID de LVM (8e) y seguir el asistente. Ejm. para disco "sdb": 
+
     `fdisk /dev/sdb`
 
-- Agregando el disco o la(s) particion(es) a LVM physical volume: pvcreate /dev/sdb1 /dev/sdc1
-- You can Scanning for Block Devices: lvmdiskscan
-- Puedes mostrar Physical Volume; hay 3 comandos que se usan para mostrar propiedades de physical volumes LVM: pvs, pvdisplay, and pvscan
-- Crea 2 volume group name vg-docker y vg-extradata, asignandole 2 particion a cada grupo: sudo vgcreate vg-docker /dev/sdd1 /dev/sde1
+5. Crear PV: Agregamos el disco o la(s) particion(es) al LVM physical volume: 
+
+    `pvcreate /dev/sdb1 /dev/sdc1`
+
+6. You can Scanning for Block Devices: 
+
+    `lvmdiskscan`
+
+        [root@vm1 vagrant]# lvmdiskscan
+        /dev/sda1 [     <40.00 GiB] 
+        /dev/sdb1 [      <5.00 GiB] LVM physical volume
+        /dev/sdc1 [      <5.00 GiB] LVM physical volume
+        /dev/sdd1 [      <5.00 GiB] LVM physical volume
+        /dev/sde1 [      <5.00 GiB] LVM physical volume
+        /dev/sdf1 [      <5.00 GiB] LVM physical volume
+        0 disks
+        1 partition
+        0 LVM physical volume whole disks
+        5 LVM physical volumes
+
+7. Puedes mostrar Physical Volume; hay 3 comandos que se usan para mostrar propiedades de physical volumes LVM: pvs, pvdisplay, and pvscan
+
+8. Crea 2 volume group name vg-docker y vg-extradata, asignandole 2 particion a cada grupo: sudo vgcreate vg-docker /dev/sdd1 /dev/sde1
+
 sudo vgcreate vg-extradata /dev/sdd1 /dev/sde1
+
 - Mostrar info de Volume Group: sudo vgdisplay 
 - Crear Logical Volume "log_vol_1" con 2GB en el vg-docker: sudo lvcreate -L 2048M vg-docker -n log_vol_1
 - Mostrar LV: sudo lvdisplay 
