@@ -1,4 +1,4 @@
 note
 Vagrantfile-o*
 *.vdi
-.gitinore
+.gitignore
