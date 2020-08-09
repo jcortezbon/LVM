@@ -104,6 +104,10 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
 - Crear Logical Volume "log_vol_2" con 2GB en el vg-extradata: 
 
     `$ lvcreate -L 2048M vg-extradata -n log_vol_2`
+    
+o
+
+    `$ lvcreate -L +2G -n lv_name vg_name`
 
 - Mostrar LV: 
 
@@ -142,11 +146,50 @@ Logical volume (LV)  An LV is a part of a VG and is made of LEs. An LV can be fo
         tmpfs                             100M     0  100M   0% /run/user/1000
         /dev/mapper/vg--docker-log_vol_1  8.0G   33M  8.0G   1% /mnt/docker
 
-10. Adicional:
-
-- Extending Volume Groups: Si deseas puedes agregar mas PV a un VG existente con el siguiente comando:
+10. Extending Volume Groups: Si deseas puedes agregar mas PV a un VG existente con el siguiente comando:
+    xy = PV disponible
 
     `vgextend name_VG /dev/sdxy`
 
-    xy = PV disponible
+11. Extending Logical Volume: Luego de agregar otro PV al VG podemos extener el tamaño del LV (M=Megabytes G=Gigabytes), luego extendemos el FileSystem para ocupar el actual tamaño del LV
 
+    `lvextend -L8G /dev/vg-docker/log_vol_1`
+
+    `xfs_growfs /dev/vg-docker/log_vol_1`
+
+- Otra forma de Extender LV 
+
+    `lvextend --size +500M --resizefs /mnt/docker`
+
+
+12. Reducir un Volumen:
+
+- Desmontar 
+
+    `umount /dev/mapper/testing-storage`
+
+- recomendado hacer un chequeo del filesystem
+
+    `e2fsck -f /dev/mapper/testing-storage`
+
+- Reducimos el fs
+
+    `resize2fs /dev/mapper/testing-storage 1G`
+
+- volvemos a montar el filesystem y contastatamos que el tamaño se redujo
+
+    `mount /storage/`
+
+- Ahora bien, hasta aquí sólo se achicó el filesystem y no se modificó nada del volumen lógico, por lo que es de suponer que el mismo se haya mantenido sin cambios. Se puede verificar esto mediante el siguiente comando:
+
+    `lvdisplay /dev/testing/storage | grep Size`
+
+- Entonces, para reducir efectivamente el volumen hay que indicarle con el comando lvreduce cuál será su nuevo tamaño. En este caso, 1GB.
+
+    `lvreduce -L 1GB /dev/testing/storage`
+
+- verificamos:
+
+    `df -h`
+
+    `lvdisplay /dev/testing/storage | grep Size`
